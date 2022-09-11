@@ -1,5 +1,5 @@
 # Vending Machine
-Criar um programa para controlar uma máquina de venda de alimentos
+Criar um programa em C/C++ para controlar uma máquina de venda de alimentos
 
 O programa deve conter as seguintes funcionalidades:
 
