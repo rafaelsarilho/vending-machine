@@ -11,7 +11,7 @@ int main(){
     int pedido;
 
     
-    cout << estoque[3][2].itens << endl;
+    cout << estoque[3][1].itens << endl;
   
     return 0;
 }
