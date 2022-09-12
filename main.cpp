@@ -8,9 +8,7 @@ using namespace std;
 
 
 int main(){
-    int pedido;
 
-    
     cout << estoque[3][1].itens << endl;
   
     return 0;
