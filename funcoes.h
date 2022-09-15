@@ -4,6 +4,7 @@ void skip(){
   getchar();
 }
 
+// categoria de lanches
 void menu() {
   system("clear");
   cout << "Digite a categoria desejada: " << endl;
@@ -13,13 +14,14 @@ void menu() {
   cout << "4 - Doces" << endl;
 }
 
-void pagamento(float *valor, float *total) {
+//menu de pagamentos
+void pagamento(float *valorpedido, float *total) {
   int menupg, verifpg, senha;
   float pago, troco;
 
   do {
     system("clear");
-    cout << "Valor total do seu pedido: R$ " << *valor << endl;
+    cout << "Valor total do seu pedido: R$ " << *valorpedido << endl;
     cout << "Qual a forma de pagamento desejada?" << endl;
     cout << "1 - Dinheiro" << endl;
     cout << "2 - Cartão de débito" << endl;
@@ -31,14 +33,14 @@ void pagamento(float *valor, float *total) {
       case 1: { //pagamento em dinheiro
         cout << "Insira o dinheiro na máquina" << endl;
         cin >> pago;
-        if(pago >= *valor){
-          troco = pago - *valor;
+        if(pago >= *valorpedido){
+          troco = pago - *valorpedido;
           if (troco > 0){
             cout << "Seu troco é de: R$ " << troco << endl;
           }
           cout << "Obrigado pelo seu pedido! \n Retire seu produto =)" << endl;
-          *total += *valor;
-          *valor = 0;
+          *total += *valorpedido;
+          *valorpedido = 0;
           verifpg = 1;
           skip();
           system("clear");
@@ -59,8 +61,8 @@ void pagamento(float *valor, float *total) {
         cout << "Processando ..." << endl;
         cout << "Aprovado!" << endl;
         cout << "Obrigado pelo seu pedido! \n Retire seu produto =)" << endl;
-        *total += *valor;
-        *valor = 0;
+        *total += *valorpedido;
+        *valorpedido = 0;
         verifpg = 1;
         skip();
         system("clear");
@@ -72,7 +74,7 @@ void pagamento(float *valor, float *total) {
         skip();
         system("clear");
         verifpg = 1;
-        *valor = 0;
+        *valorpedido = 0;
         break;
       }
 
@@ -88,6 +90,7 @@ void pagamento(float *valor, float *total) {
 
 }
 
+//menu para fazer pedidos
 void pedido(int categ, float *total, float *valorpedido) {
   int qnt = 0;
   char novo = 's';
@@ -351,7 +354,7 @@ void administrador(int senha, int *shutd, float *total) {
         skip();
       }
 
-      if(menu != 0){
+      if(menu != 0 && menu != 5){
         cout << "Deseja continuar no menu de administrador? <s>im ou <n>ão? ";
         cin >> adm;
       }
