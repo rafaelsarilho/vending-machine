@@ -14,7 +14,6 @@ void pagamento(float *valorpedido, float *total);
 void pedido(int categ, float *total, float *valorpedido);
 void administrador(int senha, int *shutd, float *total);
 
-
 int main(){
   int cat, deslig = 1;
   float vendatotal = 0, valorpedido = 0;
