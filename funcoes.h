@@ -6,7 +6,6 @@ void skip(){
 
 // categoria de lanches
 void menu() {
-  system("clear");
   cout << "Digite a categoria desejada: " << endl;
   cout << "1 - Salgadinhos" << endl;
   cout << "2 - Lanches naturais" << endl;
@@ -55,7 +54,7 @@ void pagamento(float *valorpedido, float *total) {
       }
 
       case 2: 
-      case 3: {
+      case 3: { //pagamento em cartão
         cout << "Digite sua senha: ";
         cin >> senha;
         cout << "Processando ..." << endl;
@@ -69,7 +68,7 @@ void pagamento(float *valorpedido, float *total) {
         break;
       }
 
-      case 4: {
+      case 4: { //cancelar pedido
         cout << "Pedido cancelado!" << endl;
         skip();
         system("clear");
@@ -78,7 +77,7 @@ void pagamento(float *valorpedido, float *total) {
         break;
       }
 
-      default: {
+      default: { //opção para entrada inválida
         cout << "Selecione uma opção válida!" << endl;
         skip();
         system("clear");
@@ -92,115 +91,41 @@ void pagamento(float *valorpedido, float *total) {
 
 //menu para fazer pedidos
 void pedido(int categ, float *total, float *valorpedido) {
-  int qnt = 0;
+  int qnt = 0, item = 0;
   char novo = 's';
   int i, j;
   float valor = 0;
-  system("clear");
+
   do {
-    switch (categ) {
-        case 1: {
-          system("clear");
-          cout << "Escolha o produto: " << endl;
-          for(i = 0; i < 3; i++){
-            cout << i+1 << " " << estoque[categ-1][i].itens << endl;
-          }
-          cin >> categ;
-          cout << "Você escolheu o item: " << estoque[0][categ-1].itens << ". Ele custa: R$ " << estoque[0][categ-1].valores << endl;
-          cout << "Existem " << estoque[0][categ-1].quantidade << " itens disponíveis no para compra" << endl;
-          cout << "Quantos você quer comprar? " << endl;
-          cin >> qnt;
-          if(qnt <= estoque[0][categ-1].quantidade){
-            *valorpedido += qnt*estoque[0][categ-1].valores;
-            cout << "O valor total do seu pedido é: R$ " << *valorpedido << endl;
-            estoque[0][categ-1].quantidade -= qnt;
-          }
-          else {
-            cout << "Quantidade inválida!" << endl;
-          }
-          break;
-        }
-
-        case 2: {
-          system("clear");
-          cout << "Escolha o produto: " << endl;
-          for(i = 0; i < 3; i++){
-            cout << i+1 << " " << estoque[categ-1][i].itens << endl;
-          }
-          cin >> categ;
-          cout << "Você escolheu o item: " << estoque[1][categ-1].itens << ". Ele custa: R$ " << estoque[1][categ-1].valores << endl;
-          cout << "Existem " << estoque[1][categ-1].quantidade << " itens disponíveis no para compra" << endl;
-          cout << "Quantos você quer comprar? " << endl;
-          cin >> qnt;
-          if(qnt <= estoque[1][categ-1].quantidade){
-            *valorpedido += qnt*estoque[1][categ-1].valores;
-            cout << "O valor total do seu pedido é: R$ " << *valorpedido << endl;
-            estoque[1][categ-1].quantidade -= qnt;
-          }
-          else {
-            cout << "Quantidade inválida!" << endl;
-          }
-          break;
-        }
-
-        case 3: {
-          system("clear");
-          cout << "Escolha o produto: " << endl;
-          for(i = 0; i < 3; i++){
-            cout << i+1 << " " << estoque[categ-1][i].itens << endl;
-          }
-          cin >> categ;
-          cout << "Você escolheu o item: " << estoque[2][categ-1].itens << ". Ele custa: R$ " << estoque[2][categ-1].valores << endl;
-          cout << "Existem " << estoque[2][categ-1].quantidade << " itens disponíveis no para compra" << endl;
-          cout << "Quantos você quer comprar? " << endl;
-          cin >> qnt;
-          if(qnt <= estoque[2][categ-1].quantidade){
-            *valorpedido += qnt*estoque[2][categ-1].valores;
-            cout << "O valor total do seu pedido é: R$ " << *valorpedido << endl;
-            estoque[2][categ-1].quantidade -= qnt;
-          }
-          else {
-            cout << "Quantidade inválida!" << endl;
-          }
-          break;
-        }
-
-        case 4: {
-          system("clear");
-          cout << "Escolha o produto: " << endl;
-          for(i = 0; i < 3; i++){
-            cout << i+1 << " " << estoque[categ-1][i].itens << endl;
-          }
-          cin >> categ;
-          cout << "Você escolheu o item: " << estoque[3][categ-1].itens << ". Ele custa: R$ " << estoque[3][categ-1].valores << endl;
-          cout << "Existem " << estoque[3][categ-1].quantidade << " itens disponíveis no para compra" << endl;
-          cout << "Quantos você quer comprar? " << endl;
-          cin >> qnt;
-          if(qnt <= estoque[3][categ-1].quantidade){
-            *valorpedido += qnt*estoque[3][categ-1].valores;
-            cout << "O valor total do seu pedido é: R$ " << *valorpedido << endl;
-            estoque[3][categ-1].quantidade -= qnt;
-          }
-          else {
-            cout << "Quantidade inválida!" << endl;
-          }
-          break;
-        }
-
-        default: {
-          system("clear");
-          cout << "Categoria inválida!" << endl;
-          break;
-        }
-      }
-      cout << "Deseja adicionar mais algum item ao carrinho? <s>im ou <n>ão" << endl;
-      cin >> novo;
-      if(novo == 's'){
-        system("clear");
-        menu();
-        cout << "O valor do seu pedido atual é de: R$ " << *valorpedido << endl;
-        cin >> categ;
-      }
+    system("clear");
+    cout << "Escolha seu produto: " << endl;
+    for(i = 0; i < 3; i++){
+      cout << i+1 << " " << estoque[categ-1][i].itens << endl;
+    }
+    cin >> item;
+    system("clear");
+    cout << "Você escolheu o item: " << estoque[categ-1][item-1].itens << ". Ele custa: R$ " << estoque[categ-1][item-1].valores << endl;
+    cout << "Existem " << estoque[categ-1][item-1].quantidade << " itens disponíveis no para compra" << endl;
+    cout << "Quantos você quer comprar? " << endl;
+    cin >> qnt;
+    if(qnt <= estoque[categ-1][item-1].quantidade){
+      *valorpedido += qnt*estoque[categ-1][item-1].valores;
+      cout << "O valor total do seu pedido é: R$ " << *valorpedido << endl;
+      estoque[categ-1][item-1].quantidade -= qnt;
+    }
+    else {
+      cout << "Quantidade inválida!" << endl;
+    }
+    skip();
+    system("clear");
+    cout << "Deseja adicionar mais algum item ao carrinho? <s>im ou <n>ão" << endl;
+    cin >> novo;
+    if(novo == 's'){
+      system("clear");
+      menu();
+      cout << "O valor do seu pedido atual é de: R$ " << *valorpedido << endl;
+      cin >> categ;
+    }
   } while (novo == 's'); 
   if(*valorpedido > 0){
     pagamento(valorpedido, total);
@@ -210,8 +135,8 @@ void pedido(int categ, float *total, float *valorpedido) {
 
 // menu de administrador do sistema
 void administrador(int senha, int *shutd, float *total) {
-  char adm;
-  int menu, repos, i, j, qnt;
+  char adm, reposi;
+  int categ, repos,item, i, j, qnt;
   float potencial = 0;
   system("clear");
   cout << "Digite a senha do administrador: ";
@@ -227,10 +152,10 @@ void administrador(int senha, int *shutd, float *total) {
       cout << "5 - Iniciar a máquina no modo de usuário" << endl;
       cout << "6 - Alterar senha" << endl;
       cout << "0 - Desligar máquina" << endl;
-      cin >> menu;
+      cin >> categ;
       
       //inventário
-      if(menu == 1){
+      if(categ == 1){
         system("clear");
         cout << "Inventário: " << endl;
         for(i = 0; i<4; i++){
@@ -243,90 +168,37 @@ void administrador(int senha, int *shutd, float *total) {
       }
 
       //reposição
-      if(menu == 2){
-        system("clear");
-        cout << "Menu de reposição" << endl;
-        cout << "Categorias:" << endl;
-        cout << "1 - Salgadinhos" << endl;
-        cout << "2- Lanches naturais" << endl;
-        cout << "3 - Bebidas" << endl;
-        cout << "4 - Doces" << endl;
-        cin >> repos;
-
-        switch (repos) {
-          case 1: { // repor categoria salgadinhos
-            cout << "Digite o produto para repor o estoque: " << endl;
-            for(i = 0; i < 3; i++){
-              cout << i+1 << " " << estoque[repos-1][i].itens << endl;
-            }
-            cin >> repos;
-            cout << "Você deseja repor o item " << estoque[0][repos-1].itens << endl;
-            cout << "Qual a quantidade que deseja repor? " << endl;
-            cin >> qnt;
-            estoque[0][repos-1].quantidade += qnt;
-            cout << "A nova quantidade em estoque do item " << estoque[0][repos-1].itens << " é de " << estoque[0][repos-1].quantidade << endl;
-            break;
+      if(categ == 2){
+        do{
+          system("clear");
+          menu();
+          cin >> repos;
+          system("clear");
+          cout << "Digite o produto para repor o estoque: " << endl;
+          for(i = 0; i < 3; i++){
+            cout << i+1 << " " << estoque[repos-1][i].itens << endl;
           }
+          cin >> item;
+          cout << "Você deseja repor o item " << estoque[repos-1][item-1].itens << endl;
+          cout << "Qual a quantidade que deseja repor? " << endl;
+          cin >> qnt;
+          estoque[repos-1][item-1].quantidade += qnt;
+          cout << "A nova quantidade em estoque do item " << estoque[repos-1][item-1].itens << " é de " << estoque[repos-1][item-1].quantidade << endl;
 
-          case 2: { //repor categoria lanches naturais
-            cout << "Digite o produto para repor o estoque: " << endl;
-            for(i = 0; i < 3; i++){
-              cout << i+1 << " " << estoque[repos-1][i].itens << endl;
-            }
-            cin >> repos;
-            cout << "Você deseja repor o item " << estoque[1][repos-1].itens << endl;
-            cout << "Qual a quantidade que deseja repor? " << endl;
-            cin >> qnt;
-            estoque[1][repos-1].quantidade += qnt;
-            cout << "A nova quantidade em estoque do item " << estoque[1][repos-1].itens << " é de " << estoque[1][repos-1].quantidade << endl;
-            break;
-          }
-
-          case 3: { //repor categoria bebidas
-            cout << "Digite o produto para repor o estoque: " << endl;
-            for(i = 0; i < 3; i++){
-              cout << i+1 << " " << estoque[repos-1][i].itens << endl;
-            }
-            cin >> repos;
-            cout << "Você deseja repor o item " << estoque[2][repos-1].itens << endl;
-            cout << "Qual a quantidade que deseja repor? " << endl;
-            cin >> qnt;
-            estoque[2][repos-1].quantidade += qnt;
-            cout << "A nova quantidade em estoque do item " << estoque[2][repos-1].itens << " é de " << estoque[2][repos-1].quantidade << endl;            
-            break;
-          }
-
-          case 4: {
-            cout << "Digite o produto para repor o estoque: " << endl;
-            for(i = 0; i < 3; i++){
-              cout << i+1 << " " << estoque[repos-1][i].itens << endl;
-            }
-            cin >> repos;
-            cout << "Você deseja repor o item " << estoque[3][repos-1].itens << endl;
-            cout << "Qual a quantidade que deseja repor? " << endl;
-            cin >> qnt;
-            estoque[3][repos-1].quantidade += qnt;
-            cout << "A nova quantidade em estoque do item " << estoque[3][repos-1].itens << " é de " << estoque[3][repos-1].quantidade << endl;
-            break;
-          }
-
-          default: {
-            cout << "Opção inválida!" << endl;
-            break;
-          }
-        }
-        skip();
+          cout << "Deseja repor mais itens? <s>im ou <n>ão? ";
+          cin >> reposi;
+        } while (reposi == 's');
       }
 
       //faturamento atual
-      if(menu == 3){
+      if(categ == 3){
         system("clear");
         cout << "O faturamento atual da máquina é de:  R$ " << *total << endl;
         skip();
       }
 
       //potencial faturamento
-      if(menu == 4){
+      if(categ == 4){
         system("clear");
         for(i=0; i<4;i++){
           for(j=0;j<3;j++){
@@ -337,8 +209,12 @@ void administrador(int senha, int *shutd, float *total) {
         skip();
       }
 
+      if(categ == 5) {
+        adm = 'n';
+      }
+
       //alterar senha
-      if(menu == 6){
+      if(categ == 6){
         system("clear");
         cout << "Digite a nova senha: ";
         cin >> passw;
@@ -347,17 +223,17 @@ void administrador(int senha, int *shutd, float *total) {
       }
 
       //desligar máquina
-      if(menu == 0){
+      if(categ == 0){
         *shutd = 0;
         adm = 'n';
       }
 
-      if(menu >=7 || menu < 0) {
+      if(categ >=7 || categ < 0) {
         cout << "Opção inválida!" << endl;
         skip();
       }
 
-      if(menu != 0 && menu != 5){
+      if(categ != 0 && categ != 5){
         cout << "Deseja continuar no menu de administrador? <s>im ou <n>ão? ";
         cin >> adm;
       }

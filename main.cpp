@@ -16,24 +16,32 @@ int main(){
   cout << "Pressione enter para continuar..." << endl;
   getchar();
   do {
+
     //função menu em funcoes.h
+    system("clear");
+    cout << "Seja bem-vindo(a) a vending machine Fatekita =)" << endl;
     menu();
     cin >> cat;
 
-    if(cat == 0){
-      //função administrador em funcoes.h
-      administrador(passw, &deslig, &vendatotal);
-    }
+    switch (cat){
+      case 0: { //entrar na função administrador
+        administrador(passw, &deslig, &vendatotal);
+        break;
+      }
+      case 1:
+      case 2:
+      case 3:
+      case 4: { //entrar na função pedido
+        pedido(cat, &vendatotal, &valorpedido);
+        break;
+      }
 
-    if(cat>= 1 && cat <=4){
-      //função pedido em funcoes.h
-      pedido(cat, &vendatotal, &valorpedido);
-    }
-
-    if(cat<0 || cat >4) {
-      cout << "Digite uma categoria válida!" << endl;
-      skip();
-      deslig = 1;
+      default: { //opção default para entrada inválida
+        cout << "Digite uma categoria válida!" << endl;
+        skip();
+        deslig = 1;
+        break;
+      }
     }
   } while (deslig == 1);
 
