@@ -13,6 +13,7 @@ int main(){
   float vendatotal = 0, valorpedido = 0;
   cout << "A máquina possui a função de administrador que pode ser acessado a qualquer momento apertando 0 na tela de categorias." << endl;
   cout << "A senha padrão é 123 que deve ser alterada assim que possível!" << endl; 
+  cout << "Pressione enter para continuar..." << endl;
   getchar();
   do {
     //função menu em funcoes.h
@@ -27,6 +28,12 @@ int main(){
     if(cat>= 1 && cat <=4){
       //função pedido em funcoes.h
       pedido(cat, &vendatotal, &valorpedido);
+    }
+
+    if(cat<0 || cat >4) {
+      cout << "Digite uma categoria válida!" << endl;
+      skip();
+      deslig = 1;
     }
   } while (deslig == 1);
 

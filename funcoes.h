@@ -202,7 +202,10 @@ void pedido(int categ, float *total, float *valorpedido) {
         cin >> categ;
       }
   } while (novo == 's'); 
-  pagamento(valorpedido, total);
+  if(*valorpedido > 0){
+    pagamento(valorpedido, total);
+  }
+  
 }
 
 // menu de administrador do sistema
